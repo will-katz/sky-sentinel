@@ -1,15 +1,13 @@
 import { Shield } from 'lucide-react';
+import { Logo } from './Logo';
 
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6">
-          <div className="w-9 h-9 mx-auto bg-primary-foreground/10 rounded-lg flex items-center justify-center text-xs font-bold tracking-wider">
-            SS
-          </div>
-          <h4 className="mt-2 text-base">Sky Sentinel</h4>
-          <p className="text-sm opacity-70 mt-1 max-w-md mx-auto">
+          <Logo variant="dark" className="h-12 w-auto mx-auto" />
+          <p className="text-sm opacity-70 mt-3 max-w-md mx-auto">
             High-resolution aerial inspections for commercial, residential, and industrial clients.
           </p>
         </div>

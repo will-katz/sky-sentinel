@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { Logo } from './Logo';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,15 +8,10 @@ export function Header() {
   return (
     <header className="bg-background border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center">
-              <span className="text-muted-foreground">LOGO</span>
-            </div>
-            <div>
-              <h1 className="font-semibold">Sky Sentinel</h1>
-              <p className="text-sm text-muted-foreground">Professional Drone Services</p>
-            </div>
+        <div className="flex justify-between items-center py-3 min-h-20">
+          <div className="flex flex-col gap-1">
+            <Logo className="h-10 w-auto" />
+            <p className="text-sm text-muted-foreground">Professional Drone Inspection</p>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
