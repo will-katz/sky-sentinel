@@ -1,0 +1,96 @@
+@import 'tailwindcss' source(none);
+@source '../**/*.{js,ts,jsx,tsx}';
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #000000;
+  --muted: #e5e5e5;
+  --muted-foreground: #737373;
+  --accent: #f0f0f0;
+  --destructive: #404040;
+  --border: #d4d4d4;
+  --input-background: #fafafa;
+  --ring: #a3a3a3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input-background: var(--input-background);
+  --color-ring: var(--ring);
+}
+
+@layer base {
+  html {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100%;
+  }
+
+  #root {
+    min-height: 100%;
+  }
+
+  h1 {
+    @apply text-3xl font-semibold;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  h3 {
+    @apply text-lg font-medium;
+  }
+
+  h4 {
+    @apply text-base font-medium;
+  }
+}
+
+/* react-day-picker */
+.rdp-day_selected,
+.rdp-day_selected:hover {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.rdp-day_today:not(.rdp-day_selected) {
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: #f0f0f0 !important;
+}
+
+/* sonner toasts */
+[data-sonner-toast][data-type='success'],
+[data-sonner-toast][data-type='error'],
+[data-sonner-toast][data-type='info'] {
+  background: #fff !important;
+  border-color: #d4d4d4 !important;
+  color: #000 !important;
+}
+
+[data-sonner-toast] [data-icon] svg {
+  color: #000 !important;
+}
