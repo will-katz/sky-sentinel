@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Loader2, Mail, Phone, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { ScrollReveal } from './ScrollReveal';
+import { CONTACT_API_URL } from '../config';
 
 interface ContactFormData {
   name: string;
@@ -11,25 +14,55 @@ interface ContactFormData {
 }
 
 export function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormData>();
 
-  const onSubmit = (_data: ContactFormData) => {
-    toast.success('Thank you! We will contact you within 24 hours.');
-    reset();
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(CONTACT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const responseText = await response.text();
+      let responseData: { message?: string } = {};
+
+      try {
+        responseData = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        responseData = { message: responseText };
+      }
+
+      if (!response.ok) {
+        console.error('Contact form error:', response.status, responseText);
+        toast.error(responseData.message ?? `Request failed (${response.status})`);
+        return;
+      }
+
+      toast.success('Thank you! We will contact you within 24 hours.');
+      reset();
+    } catch {
+      toast.error('Network error. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="mb-4">Get in Touch</h2>
           <p className="text-muted-foreground">
             Ready to schedule an inspection? Fill out the form below and we'll get back to you shortly.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="lg:col-span-2">
+          <ScrollReveal direction="left" className="lg:col-span-2">
             <form onSubmit={handleSubmit(onSubmit)} className="bg-card rounded-lg border border-border p-8 space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -88,8 +121,9 @@ export function ContactForm() {
                     <option value="construction">Construction Monitoring</option>
                     <option value="infrastructure">Infrastructure & Utilities</option>
                     <option value="residential">Residential Inspection</option>
-                    <option value="land">Land Survey</option>
+                    <option value="land">Aerial Photography</option>
                     <option value="industrial">Industrial Facility</option>
+                    <option value="surveillance">Surveillance</option>
                   </select>
                   {errors.serviceType && <p className="text-destructive text-sm mt-1">{errors.serviceType.message}</p>}
                 </div>
@@ -108,54 +142,53 @@ export function ContactForm() {
 
               <button
                 type="submit"
-                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <Send className="w-5 h-5" />
-                Send Message
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
-          </div>
+          </ScrollReveal>
 
           <div className="space-y-6">
-            <div className="bg-card rounded-lg border border-border p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="mb-1">Phone</h4>
-                  <p className="text-sm text-muted-foreground">(555) 123-4567</p>
-                  <p className="text-sm text-muted-foreground">Mon-Fri 8am-5pm</p>
+            <ScrollReveal direction="right" delay={100}>
+              <div className="bg-card rounded-lg border border-border p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="mb-1">Phone</h4>
+                    <p className="text-sm text-muted-foreground">(xxx) xxx-xxxx</p>
+                    <p className="text-sm text-muted-foreground">Mon-Fri 8am-5pm</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
 
-            <div className="bg-card rounded-lg border border-border p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="mb-1">Email</h4>
-                  <p className="text-sm text-muted-foreground">info@skysentinel.com</p>
-                  <p className="text-sm text-muted-foreground">We reply within 24 hours</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-card rounded-lg border border-border p-6">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="mb-1">Location</h4>
-                  <p className="text-sm text-muted-foreground">123 Aviation Way</p>
-                  <p className="text-sm text-muted-foreground">Suite 200</p>
-                  <p className="text-sm text-muted-foreground">Your City, ST 12345</p>
+            <ScrollReveal direction="right" delay={200}>
+              <div className="bg-card rounded-lg border border-border p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="mb-1">Email</h4>
+                    <p className="text-sm text-muted-foreground">skysentineldrone.com@skysentineldrone.com</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { Building2, HardHat, Zap, Home, TreePine, Factory } from 'lucide-react';
+import { ScrollReveal } from './ScrollReveal';
 
 const services = [
   {
@@ -27,9 +28,9 @@ const services = [
   },
   {
     icon: TreePine,
-    title: 'Land Surveys',
-    description: 'Accurate topographical surveys and land mapping services.',
-    features: ['Topographical mapping', 'Volume calculations', 'Boundary surveys']
+    title: 'Aerial Photography',
+    description: 'High quality aerial photography and videography for real estate, marketing, and more.',
+    features: ['Aerial videography', 'Real estate photography', 'Marketing photography']
   },
   {
     icon: Factory,
@@ -43,30 +44,35 @@ export function Services() {
   return (
     <section id="services" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="mb-4">Our Inspection Services</h2>
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="mb-4">Our Sky Sentinel Services</h2>
           <p className="text-muted-foreground">
-            We provide a full range of drone inspection services tailored to your industry needs.
+            We provide a full range of professional drone services tailored to your project.
           </p>
-        </div>
+          <p className="text-muted-foreground font-bold mt-4">
+            We will also donate our drone services to any search and rescue or other disaster relief efforts.
+          </p>
+        </ScrollReveal>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                <service.icon className="w-6 h-6 text-primary" />
+            <ScrollReveal key={service.title} delay={(index % 3) * 100}>
+              <div className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow h-full">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                  <service.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="mb-2">{service.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="text-sm flex items-start gap-2">
+                      <span className="text-primary mt-1">•</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <h3 className="mb-2">{service.title}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{service.description}</p>
-              <ul className="space-y-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="text-sm flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

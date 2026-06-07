@@ -11,13 +11,12 @@ export function Header() {
         <div className="flex justify-between items-center py-3 min-h-20">
           <div className="flex flex-col gap-1">
             <Logo className="h-10 w-auto" />
-            <p className="text-sm text-muted-foreground">Professional Drone Inspection</p>
+            <p className="text-sm text-muted-foreground">Professional Drone Services</p>
           </div>
 
           <nav className="hidden md:flex items-center gap-8">
+            <a href="#about" className="text-foreground hover:text-primary transition-colors">About</a>
             <a href="#services" className="text-foreground hover:text-primary transition-colors">Services</a>
-            <a href="#schedule" className="text-foreground hover:text-primary transition-colors">Schedule</a>
-            <a href="#contact" className="text-foreground hover:text-primary transition-colors">Contact</a>
             <a href="#contact" className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:opacity-90 transition-opacity">
               Get Quote
             </a>
@@ -33,8 +32,8 @@ export function Header() {
 
         {isMenuOpen && (
           <nav className="md:hidden py-4 space-y-4">
+            <a href="#about" className="block text-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>About</a>
             <a href="#services" className="block text-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>Services</a>
-            <a href="#schedule" className="block text-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>Schedule</a>
             <a href="#contact" className="block text-foreground hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>Contact</a>
           </nav>
         )}

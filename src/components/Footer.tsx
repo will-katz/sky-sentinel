@@ -7,53 +7,26 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6">
           <Logo variant="dark" className="h-12 w-auto mx-auto" />
-          <p className="text-sm opacity-70 mt-3 max-w-md mx-auto">
-            High-resolution aerial inspections for commercial, residential, and industrial clients.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-6 text-center">
-          <div>
-            <h4 className="mb-2 text-base">Services</h4>
-            <ul className="space-y-1 text-sm opacity-80">
-              <li><a href="#services" className="hover:opacity-100 transition-opacity">Commercial</a></li>
-              <li><a href="#services" className="hover:opacity-100 transition-opacity">Construction</a></li>
-              <li><a href="#services" className="hover:opacity-100 transition-opacity">Infrastructure</a></li>
-              <li><a href="#services" className="hover:opacity-100 transition-opacity">Residential</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-2 text-base">Company</h4>
-            <ul className="space-y-1 text-sm opacity-80">
-              <li><a href="#" className="hover:opacity-100 transition-opacity">About Us</a></li>
-              <li><a href="#" className="hover:opacity-100 transition-opacity">Our Team</a></li>
-              <li><a href="#" className="hover:opacity-100 transition-opacity">Certifications</a></li>
-              <li><a href="#contact" className="hover:opacity-100 transition-opacity">Contact</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-2 text-base">Credentials</h4>
-            <ul className="space-y-1 text-sm opacity-80">
-              <li className="flex items-center justify-center gap-2">
-                <Shield className="w-3.5 h-3.5 shrink-0" />
-                <span>Veteran owned & operated</span>
-              </li>
-              <li>FAA Part 107 certified</li>
-              <li>U.S. Marine Corps veteran</li>
-              <li>Fully insured operations</li>
-            </ul>
-          </div>
+        <div className="mb-6 text-center">
+          <ul className="space-y-1 text-sm opacity-80">
+            <li className="flex items-center justify-center gap-2">
+              <Shield className="w-3.5 h-3.5 shrink-0" />
+              <span>U.S. Veteran owned & operated</span>
+            </li>
+            <li>Current and Retired Law Enforcement</li>
+            <li>FAA Part 107 certified</li>
+            <li>Fully insured operations</li>
+          </ul>
         </div>
 
         <div className="border-t border-primary-foreground/20 pt-4 text-center text-sm opacity-80">
           <p>
-            &copy; 2026{' '}
+            &copy; 2026{' Sky Sentinel. All rights reserved. Website by '}
             <a href="https://william.katzkatz.com" className="hover:opacity-100 underline transition-opacity">
               William Katz
             </a>
-            . All rights reserved.
           </p>
         </div>
       </div>
