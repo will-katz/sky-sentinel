@@ -55,7 +55,7 @@ export function ContactForm() {
     <section id="contact" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="mb-4">Get in Touch</h2>
+          <h2 className="mb-4">Request a Flight</h2>
           <p className="text-muted-foreground">
             Ready to schedule an inspection? Fill out the form below and we'll get back to you shortly.
           </p>
