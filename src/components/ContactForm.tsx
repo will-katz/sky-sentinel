@@ -184,7 +184,7 @@ export function ContactForm() {
                   </div>
                   <div>
                     <h4 className="mb-1">Email</h4>
-                    <p className="text-sm text-muted-foreground">skysentineldrone.com@skysentineldrone.com</p>
+                    <p className="text-sm text-muted-foreground">skysentineldrone@skysentineldrone.com</p>
                   </div>
                 </div>
               </div>

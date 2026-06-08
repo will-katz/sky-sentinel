@@ -1,12 +1,25 @@
 import { Cctv, Plane, Shield } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
+const fleet = [
+  {
+    src: '/dji-matrice-m30t.png',
+    alt: 'DJI Matrice M30T in flight',
+    name: 'DJI Matrice M30T',
+  },
+  {
+    src: '/dji-mavic-pro-platinum.png',
+    alt: 'DJI Mavic Pro Platinum in flight',
+    name: 'DJI Mavic Pro Platinum',
+  },
+];
+
 const highlights = [
   {
     icon: Plane,
     title: 'All-Weather Platform',
     description:
-      'Our DJI Matrice M30T is equipped with high-resolution standard and thermal cameras for inspections in demanding conditions.',
+      'Our DJI Matrice M30T and DJI Mavic Pro Platinum are equipped with high-resolution standard and thermal cameras for inspections in demanding conditions.',
   },
   {
     icon: Shield,
@@ -33,6 +46,23 @@ export function AboutSection() {
             and surveillance services for commercial, residential, and industrial clients.
           </p>
         </ScrollReveal>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+          {fleet.map((drone, index) => (
+            <ScrollReveal key={drone.name} delay={index * 100}>
+              <figure className="bg-card rounded-lg border border-border overflow-hidden">
+                <img
+                  src={drone.src}
+                  alt={drone.alt}
+                  className="w-full aspect-[4/3] object-cover"
+                />
+                <figcaption className="p-4 text-sm text-center text-muted-foreground">
+                  {drone.name}
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+          ))}
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {highlights.map((item, index) => (

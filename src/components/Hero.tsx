@@ -3,7 +3,7 @@ import { ScrollReveal } from './ScrollReveal';
 import { CredentialsStrip } from './CredentialsStrip';
 
 const features = [
-  { icon: Plane, title: 'Advanced Equipment', description: 'All-Weather DJI M30T' },
+  { icon: Plane, title: 'Advanced Equipment', description: 'DJI Matrice M30T & Mavic Pro Platinum' },
   { icon: Camera, title: 'High Resolution', description: 'Crystal clear imagery' },
   { icon: Shield, title: 'Certified Pilots', description: 'FAA licensed professionals' },
   { icon: Clock, title: 'Surveillance Services', description: 'Private and Public Events' },
@@ -18,10 +18,10 @@ export function Hero() {
             <h1 className="mb-6 opacity-70">Precision Aerial Inspections</h1>
           </ScrollReveal>
 
-          <ScrollReveal delay={150}>
-            {/* TODO: add a video of the drone in action */}
+          {/*<ScrollReveal delay={150}>
+            TODO: add a video of the drone in action
             <video src="/hero.mp4" autoPlay muted loop className="w-full h-full object-cover rounded-lg" />
-          </ScrollReveal>
+          </ScrollReveal>*/}
 
           <ScrollReveal delay={250} className="mt-8">
             <CredentialsStrip />
