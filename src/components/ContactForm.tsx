@@ -44,7 +44,8 @@ export function ContactForm() {
 
       toast.success('Thank you! We will contact you within 24 hours.');
       reset();
-    } catch {
+    } catch (error) {
+      console.error('Contact form network error:', error);
       toast.error('Network error. Please try again or call us directly.');
     } finally {
       setIsSubmitting(false);

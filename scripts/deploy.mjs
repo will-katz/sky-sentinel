@@ -14,6 +14,7 @@ import {
   CloudFrontClient,
   CreateInvalidationCommand,
 } from '@aws-sdk/client-cloudfront';
+import { configureContactApiCors } from './configure-api-cors.mjs';
 
 const ROOT_DIR = fileURLToPath(new URL('..', import.meta.url));
 const ENV_PATH = join(ROOT_DIR, '.env');
@@ -199,6 +200,9 @@ async function main() {
     );
   }
 
+  console.log('==> Configuring contact API CORS');
+  await configureContactApiCors();
+
   console.log('==> Building site');
   execSync('npm run build', { cwd: ROOT_DIR, stdio: 'inherit' });
 
@@ -226,6 +230,9 @@ async function main() {
   }
 
   console.log(`==> Deploy complete: s3://${BUCKET}/`);
+  console.log(
+    `    live preview: http://${BUCKET}.s3-website-${REGION}.amazonaws.com`,
+  );
 }
 
 main().catch((error) => {
