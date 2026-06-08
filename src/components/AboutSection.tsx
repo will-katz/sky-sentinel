@@ -37,23 +37,26 @@ const highlights = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-secondary">
+    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="mb-4">About Sky Sentinel</h2>
-          <p className="text-muted-foreground">
-            Sky Sentinel utilizes unmanned aerial vehicles to deliver safe, efficient aerial inspections
-            and surveillance services for commercial, residential, and industrial clients.
+          <p className="text-muted-foreground text-pretty">
+            Located in New Jersey and operated by officers of the Woodbridge Township Police Department, Sky Sentinel utilizes unmanned aerial vehicles to deliver safe, efficient aerial inspections
+            and surveillance services for commercial, residential, and industrial clients. Piloted by our team of experienced, licensed FAA Part 107 pilots.
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-10 sm:mb-12">
           {fleet.map((drone, index) => (
             <ScrollReveal key={drone.name} delay={index * 100}>
               <figure className="bg-card rounded-lg border border-border overflow-hidden">
                 <img
                   src={drone.src}
                   alt={drone.alt}
+                  width={800}
+                  height={600}
+                  loading="lazy"
                   className="w-full aspect-[4/3] object-cover"
                 />
                 <figcaption className="p-4 text-sm text-center text-muted-foreground">
@@ -64,7 +67,7 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
           {highlights.map((item, index) => (
             <ScrollReveal key={item.title} delay={index * 100}>
               <div className="bg-card p-6 rounded-lg border border-border h-full">

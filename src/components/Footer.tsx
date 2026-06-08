@@ -3,7 +3,7 @@ import { Logo } from './Logo';
 
 export function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground py-8">
+    <footer className="bg-primary text-primary-foreground py-8 pb-[max(2rem,env(safe-area-inset-bottom))]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-6">
           <Logo variant="dark" className="h-12 w-auto mx-auto" />

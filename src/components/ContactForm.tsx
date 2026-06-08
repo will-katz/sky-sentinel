@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Loader2, Mail, Phone, Send } from 'lucide-react';
+import { Loader2, Mail, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { ScrollReveal } from './ScrollReveal';
 import { CONTACT_API_URL } from '../config';
@@ -52,26 +52,27 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <h2 className="mb-4">Request a Flight</h2>
           <p className="text-muted-foreground">
             Ready to schedule an inspection? Fill out the form below and we'll get back to you shortly.
           </p>
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
           <ScrollReveal direction="left" className="lg:col-span-2">
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-card rounded-lg border border-border p-8 space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-card rounded-lg border border-border p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block mb-2">Full Name *</label>
                   <input
                     id="name"
                     type="text"
+                    autoComplete="name"
                     {...register('name', { required: 'Name is required' })}
-                    className="w-full px-4 py-2 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-4 py-3 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
                     placeholder="John Doe"
                   />
                   {errors.name && <p className="text-destructive text-sm mt-1">{errors.name.message}</p>}
@@ -82,6 +83,8 @@ export function ContactForm() {
                   <input
                     id="email"
                     type="email"
+                    inputMode="email"
+                    autoComplete="email"
                     {...register('email', {
                       required: 'Email is required',
                       pattern: {
@@ -89,21 +92,23 @@ export function ContactForm() {
                         message: 'Invalid email address'
                       }
                     })}
-                    className="w-full px-4 py-2 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-4 py-3 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
                     placeholder="john@example.com"
                   />
                   {errors.email && <p className="text-destructive text-sm mt-1">{errors.email.message}</p>}
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 <div>
                   <label htmlFor="phone" className="block mb-2">Phone Number *</label>
                   <input
                     id="phone"
                     type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
                     {...register('phone', { required: 'Phone number is required' })}
-                    className="w-full px-4 py-2 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-4 py-3 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
                     placeholder="(555) 123-4567"
                   />
                   {errors.phone && <p className="text-destructive text-sm mt-1">{errors.phone.message}</p>}
@@ -114,7 +119,7 @@ export function ContactForm() {
                   <select
                     id="serviceType"
                     {...register('serviceType', { required: 'Please select a service' })}
-                    className="w-full px-4 py-2 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full px-4 py-3 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring appearance-none"
                   >
                     <option value="">Select a service</option>
                     <option value="commercial">Commercial Inspection</option>
@@ -135,7 +140,7 @@ export function ContactForm() {
                   id="message"
                   {...register('message')}
                   rows={4}
-                  className="w-full px-4 py-2 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                  className="w-full px-4 py-3 bg-input-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                   placeholder="Tell us about your project and inspection needs..."
                 />
               </div>
@@ -143,7 +148,7 @@ export function ContactForm() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full bg-primary text-primary-foreground px-6 py-3.5 min-h-12 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
@@ -161,12 +166,13 @@ export function ContactForm() {
           </ScrollReveal>
 
           <div className="space-y-6">
-            <ScrollReveal direction="right" delay={100}>
+            {/*<ScrollReveal direction="right" delay={100}>
               <div className="bg-card rounded-lg border border-border p-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
+                    TODO: Add phone number and hours of operation 
                   <div>
                     <h4 className="mb-1">Phone</h4>
                     <p className="text-sm text-muted-foreground">(xxx) xxx-xxxx</p>
@@ -174,7 +180,7 @@ export function ContactForm() {
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </ScrollReveal>*/}
 
             <ScrollReveal direction="right" delay={200}>
               <div className="bg-card rounded-lg border border-border p-6">
@@ -184,7 +190,12 @@ export function ContactForm() {
                   </div>
                   <div>
                     <h4 className="mb-1">Email</h4>
-                    <p className="text-sm text-muted-foreground">skysentineldrone@skysentineldrone.com</p>
+                    <a
+                      href="mailto:skysentineldrone@skysentineldrone.com"
+                      className="text-sm text-muted-foreground break-all hover:text-primary transition-colors"
+                    >
+                      skysentineldrone@skysentineldrone.com
+                    </a>
                   </div>
                 </div>
               </div>

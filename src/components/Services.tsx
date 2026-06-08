@@ -42,19 +42,19 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-20 bg-background">
+    <section id="services" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="mb-4">Our Sky Sentinel Services</h2>
           <p className="text-muted-foreground">
             We provide a full range of professional drone services tailored to your project.
           </p>
-          <p className="text-muted-foreground font-bold mt-4">
+          <p className="text-blue-950 text-base sm:text-lg font-bold mt-4 text-pretty">
             We will also donate our drone services to any search and rescue or other disaster relief efforts.
           </p>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <ScrollReveal key={service.title} delay={(index % 3) * 100}>
               <div className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow h-full">

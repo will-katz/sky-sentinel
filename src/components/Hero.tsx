@@ -11,11 +11,15 @@ const features = [
 
 export function Hero() {
   return (
-    <section className="bg-gradient-to-br from-background via-background to-secondary py-20">
+    <section className="bg-gradient-to-br from-background via-background to-secondary py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <ScrollReveal>
-            <h1 className="mb-6 opacity-70">Precision Aerial Inspections</h1>
+            <h1 className="mb-4 opacity-70 text-balance">Sky Sentinel: Precision Aerial Inspections</h1>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
+              Professional FAA Part 107 drone inspections, aerial photography, and surveillance
+              services for commercial, residential, and industrial clients across New Jersey.
+            </p>
           </ScrollReveal>
 
           {/*<ScrollReveal delay={150}>
@@ -28,10 +32,10 @@ export function Hero() {
           </ScrollReveal>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           {features.map((feature, index) => (
             <ScrollReveal key={feature.title} delay={index * 100}>
-              <div className="bg-card p-6 rounded-lg border border-border text-center h-full">
+              <div className="bg-card p-4 sm:p-6 rounded-lg border border-border text-center h-full">
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="w-6 h-6 text-primary" />
                 </div>
