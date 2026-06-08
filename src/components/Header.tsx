@@ -11,6 +11,11 @@ const navLinks = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => {
@@ -22,12 +27,20 @@ export function Header() {
     <header className="bg-background border-b border-border sticky top-0 z-50 pt-[env(safe-area-inset-top)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3 min-h-16 sm:min-h-20">
-          <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+          <a
+            href="#"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToTop();
+            }}
+            className="flex flex-col gap-0.5 sm:gap-1 min-w-0 rounded-lg hover:opacity-80 transition-opacity"
+            aria-label="Back to top"
+          >
             <Logo className="h-8 sm:h-10 w-auto max-w-[min(100%,12rem)]" />
             <p className="hidden sm:block text-xs sm:text-sm text-muted-foreground truncate">
               Professional Drone Services
             </p>
-          </div>
+          </a>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.slice(0, 2).map((link) => (

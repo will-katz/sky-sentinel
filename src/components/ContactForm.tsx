@@ -55,16 +55,18 @@ export function ContactForm() {
   return (
     <section id="contact" className="py-12 sm:py-16 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-          <h2 className="mb-4">Request a Flight</h2>
-          <p className="text-muted-foreground">
-            Ready to schedule an inspection? Fill out the form below and we'll get back to you shortly.
-          </p>
-        </ScrollReveal>
+        <div className="w-full max-w-3xl mx-auto mb-10 sm:mb-16 text-center">
+          <ScrollReveal className="w-full">
+            <h2 className="mb-4">Request a Flight</h2>
+            <p className="text-muted-foreground">
+              Ready to schedule an inspection? Fill out the form below and we'll get back to you shortly.
+            </p>
+          </ScrollReveal>
+        </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-          <ScrollReveal direction="left" className="lg:col-span-2">
-            <form onSubmit={handleSubmit(onSubmit)} className="bg-card rounded-lg border border-border p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto w-full">
+          <ScrollReveal className="w-full lg:col-span-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="bg-card rounded-lg border border-border p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 w-full mx-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block mb-2">Full Name *</label>
@@ -166,7 +168,7 @@ export function ContactForm() {
             </form>
           </ScrollReveal>
 
-          <div className="space-y-6">
+          <div className="w-full space-y-6">
             {/*<ScrollReveal direction="right" delay={100}>
               <div className="bg-card rounded-lg border border-border p-6">
                 <div className="flex items-start gap-4">
@@ -183,9 +185,9 @@ export function ContactForm() {
               </div>
             </ScrollReveal>*/}
 
-            <ScrollReveal direction="right" delay={200}>
-              <div className="bg-card rounded-lg border border-border p-6">
-                <div className="flex items-start gap-4">
+            <ScrollReveal delay={200} className="w-full">
+              <div className="bg-card rounded-lg border border-border p-6 w-full mx-auto max-lg:max-w-md">
+                <div className="flex flex-col items-center text-center gap-4 lg:flex-row lg:items-start lg:text-left">
                   <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>

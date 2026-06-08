@@ -145,6 +145,13 @@ section[id] {
     transform: translateX(28px);
   }
 
+  @media (max-width: 1023px) {
+    .scroll-reveal[data-direction='left'],
+    .scroll-reveal[data-direction='right'] {
+      transform: translateY(28px);
+    }
+  }
+
   .scroll-reveal-visible {
     opacity: 1;
     transform: translate(0, 0);
