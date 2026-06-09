@@ -43,7 +43,7 @@ export function AboutSection() {
         <ScrollReveal className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <h2 className="mb-4">About Sky Sentinel</h2>
           <p className="text-muted-foreground text-pretty leading-relaxed">
-            Located in New Jersey and operated by officers of the Woodbridge Township Police Department, Sky Sentinel utilizes unmanned aerial vehicles to deliver safe, efficient aerial inspections
+            Located in New Jersey and operated by active New Jersey law enforcement officers, Sky Sentinel utilizes unmanned aerial vehicles to deliver safe, efficient aerial inspections
             and surveillance services for commercial, residential, and industrial clients. Piloted by our team of experienced, licensed FAA Part 107 pilots.
           </p>
         </ScrollReveal>
