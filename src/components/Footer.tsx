@@ -24,7 +24,12 @@ export function Footer() {
         <div className="border-t border-primary-foreground/15 pt-6 text-center text-xs sm:text-sm text-primary-foreground/60">
           <p>
             &copy; 2026 Sky Sentinel. All rights reserved.{' '}
-            <a href="https://buildwithbengal.com" className="hover:text-primary-foreground text-blue-400 transition-colors duration-200">
+            <a
+              href="https://buildwithbengal.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary-foreground text-blue-400 transition-colors duration-200"
+            >
               Bengal Web Services
             </a>
           </p>
