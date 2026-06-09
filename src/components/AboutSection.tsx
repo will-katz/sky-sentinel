@@ -1,5 +1,6 @@
 import { Cctv, Plane, Shield } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+import { HighlightItem, HighlightList } from './HighlightItem';
 
 const fleet = [
   {
@@ -19,47 +20,47 @@ const highlights = [
     icon: Plane,
     title: 'All-Weather Platform',
     description:
-      'Our DJI Matrice M30T and DJI Mavic Pro Platinum are equipped with high-resolution standard and thermal cameras for inspections in demanding conditions.',
+      'High-resolution standard and thermal cameras on our Matrice M30T and Mavic Pro Platinum for demanding conditions.',
   },
   {
     icon: Shield,
     title: 'Broad Inspection Coverage',
     description:
-      'We assess infrastructure, industrial facilities, construction sites, residential properties, agricultural land, and more.',
+      'Infrastructure, industrial facilities, construction sites, residential properties, agricultural land, and more.',
   },
   {
     icon: Cctv,
     title: 'Mobile Command Surveillance',
     description:
-      'For events and locations that need live oversight, we provide real-time video and recording from our fully equipped mobile command trailer.',
+      'Watch live with certified pilots from the Sky Sentinel Mobile Command Center — real-time video for events and locations that need oversight.',
   },
 ];
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-secondary">
+    <section id="about" className="py-14 sm:py-20 lg:py-24 bg-secondary/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center max-w-3xl mx-auto mb-12">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <h2 className="mb-4">About Sky Sentinel</h2>
-          <p className="text-muted-foreground text-pretty">
+          <p className="text-muted-foreground text-pretty leading-relaxed">
             Located in New Jersey and operated by officers of the Woodbridge Township Police Department, Sky Sentinel utilizes unmanned aerial vehicles to deliver safe, efficient aerial inspections
             and surveillance services for commercial, residential, and industrial clients. Piloted by our team of experienced, licensed FAA Part 107 pilots.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-10 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto mb-12 sm:mb-16">
           {fleet.map((drone, index) => (
             <ScrollReveal key={drone.name} delay={index * 100}>
-              <figure className="bg-card rounded-lg border border-border overflow-hidden">
+              <figure className="text-center group">
                 <img
                   src={drone.src}
                   alt={drone.alt}
                   width={800}
                   height={600}
                   loading="lazy"
-                  className="w-full aspect-[4/3] object-cover"
+                  className="w-full aspect-[4/3] object-cover rounded-xl ring-1 ring-border transition-shadow duration-300 group-hover:shadow-sm"
                 />
-                <figcaption className="p-4 text-sm text-center text-muted-foreground">
+                <figcaption className="mt-3 text-sm font-medium text-foreground tracking-tight">
                   {drone.name}
                 </figcaption>
               </figure>
@@ -67,19 +68,17 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+        <HighlightList className="max-w-6xl mx-auto">
           {highlights.map((item, index) => (
-            <ScrollReveal key={item.title} delay={index * 100}>
-              <div className="bg-card p-6 rounded-lg border border-border h-full">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="mb-2">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </div>
+            <ScrollReveal key={item.title} delay={index * 100} className="h-full">
+              <HighlightItem
+                icon={item.icon}
+                title={item.title}
+                description={item.description}
+              />
             </ScrollReveal>
           ))}
-        </div>
+        </HighlightList>
       </div>
     </section>
   );

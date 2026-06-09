@@ -57,41 +57,36 @@ export function Services() {
   };
 
   return (
-    <section id="services" className="py-12 sm:py-16 lg:py-20 bg-background">
+    <section id="services" className="py-14 sm:py-20 lg:py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16">
+        <ScrollReveal className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
           <h2 className="mb-4">Our Sky Sentinel Services</h2>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground leading-relaxed">
             We provide a full range of professional drone services tailored to your project.
           </p>
-          <p className="text-blue-950 text-base sm:text-lg font-bold mt-4 text-pretty">
+          <p className="text-foreground text-sm sm:text-base font-medium mt-4 text-pretty leading-relaxed">
             We will also donate our drone services to any search and rescue or other disaster relief efforts.
           </p>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-6xl mx-auto items-start">
+        <div className="max-w-5xl mx-auto rounded-xl overflow-hidden ring-1 ring-border bg-background pb-6 sm:pb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
           {services.map((service, index) => {
             const isOpen = openIndex === index;
 
             return (
               <ScrollReveal key={service.title} delay={(index % 3) * 100} className="w-full">
-                <div
-                  className={`bg-card rounded-lg border overflow-hidden transition-shadow duration-300 ${
-                    isOpen ? 'border-primary/30 shadow-md' : 'border-border'
-                  }`}
-                >
+                <div className={`bg-background h-full ${isOpen ? 'pb-6 sm:pb-8' : 'pb-4 sm:pb-4'}`}>
                   <button
                     type="button"
                     onClick={() => toggleService(index)}
                     aria-expanded={isOpen}
-                    className="w-full flex items-center gap-4 p-4 sm:p-5 text-left hover:bg-secondary/40 transition-colors"
+                    className="w-full flex items-center gap-3.5 px-4 sm:px-5 pt-4 sm:pt-5 text-left hover:bg-secondary/50 transition-colors duration-200"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="flex-1 min-w-0">{service.title}</h3>
+                    <service.icon className="w-5 h-5 text-foreground/60 shrink-0" strokeWidth={1.5} />
+                    <h3 className="flex-1 min-w-0 text-sm sm:text-base">{service.title}</h3>
                     <ChevronDown
-                      className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                      className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                         isOpen ? 'rotate-180' : ''
                       }`}
                     />
@@ -104,15 +99,15 @@ export function Services() {
                   >
                     <div className="overflow-hidden min-h-0">
                       <div
-                        className={`px-4 sm:px-5 pb-4 sm:pb-5 border-t border-border transition-opacity duration-300 motion-reduce:transition-none ${
+                        className={`px-4 sm:px-5 border-t border-border transition-opacity duration-300 motion-reduce:transition-none ${
                           isOpen ? 'opacity-100' : 'opacity-0'
                         }`}
                       >
-                        <p className="text-sm text-muted-foreground mt-4 mb-4">{service.description}</p>
-                        <ul className="space-y-2">
+                        <p className="text-sm text-muted-foreground mt-4 mb-4 leading-relaxed">{service.description}</p>
+                        <ul className="space-y-1.5 mb-2">
                           {service.features.map((feature) => (
-                            <li key={feature} className="text-sm flex items-start gap-2">
-                              <span className="text-primary mt-1">•</span>
+                            <li key={feature} className="text-sm text-muted-foreground flex items-start gap-2">
+                              <span className="text-foreground/30 mt-0.5">–</span>
                               <span>{feature}</span>
                             </li>
                           ))}
@@ -124,6 +119,7 @@ export function Services() {
               </ScrollReveal>
             );
           })}
+          </div>
         </div>
       </div>
     </section>

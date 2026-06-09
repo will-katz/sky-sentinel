@@ -24,7 +24,7 @@ export function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="bg-background border-b border-border sticky top-0 z-50 pt-[env(safe-area-inset-top)]">
+    <header className="bg-background/80 backdrop-blur-md border-b border-border sticky top-0 z-50 pt-[env(safe-area-inset-top)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3 min-h-16 sm:min-h-20">
           <a
@@ -47,14 +47,14 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 {link.label}
               </a>
             ))}
             <a
               href="#contact"
-              className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg hover:opacity-90 transition-opacity"
+              className="bg-primary text-primary-foreground text-sm px-5 py-2 rounded-full hover:opacity-90 transition-opacity duration-200"
             >
               Get Quote
             </a>
@@ -82,7 +82,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="block py-3 px-2 text-foreground hover:text-primary transition-colors text-base"
+                className="block py-3 px-2 text-muted-foreground hover:text-foreground transition-colors duration-200 text-base"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {link.label}
@@ -90,7 +90,7 @@ export function Header() {
             ))}
             <a
               href="#contact"
-              className="block mt-2 py-3.5 px-4 text-center bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity text-base font-medium"
+              className="block mt-2 py-3.5 px-4 text-center bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-base font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               Get Quote
