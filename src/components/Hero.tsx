@@ -2,6 +2,7 @@ import { Clock, MonitorPlay, Plane, Shield } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { CredentialsStrip } from './CredentialsStrip';
 import { HighlightItem, HighlightList } from './HighlightItem';
+import { Logo } from './Logo';
 
 const features = [
   {
@@ -27,7 +28,8 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <ScrollReveal>
-            <h1 className="mb-5 text-balance">Sky Sentinel: Precision Aerial Inspections</h1>
+            <Logo className="h-16 sm:h-20 w-auto mx-auto mb-6 sm:mb-8" />
+            <h1 className="sr-only">Sky Sentinel: Precision Aerial Inspections</h1>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Professional FAA Part 107 drone inspections, aerial photography, and surveillance
               services for commercial, residential, and industrial clients across New Jersey.
