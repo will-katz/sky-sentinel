@@ -1,10 +1,9 @@
-import { Plane, Camera, Shield, Clock } from 'lucide-react';
+import { Plane, Shield, Clock } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 import { CredentialsStrip } from './CredentialsStrip';
 
 const features = [
   { icon: Plane, title: 'Advanced Equipment', description: 'DJI Matrice M30T & Mavic Pro Platinum' },
-  { icon: Camera, title: 'High Resolution', description: 'Crystal clear imagery' },
   { icon: Shield, title: 'Certified Pilots', description: 'FAA licensed professionals' },
   { icon: Clock, title: 'Surveillance Services', description: 'Private and Public Events' },
 ];
@@ -32,7 +31,7 @@ export function Hero() {
           </ScrollReveal>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
           {features.map((feature, index) => (
             <ScrollReveal key={feature.title} delay={index * 100}>
               <div className="bg-card p-4 sm:p-6 rounded-lg border border-border text-center h-full">
