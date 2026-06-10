@@ -1,11 +1,13 @@
+import { assetUrl } from '../assetUrl';
+
 interface LogoProps {
   className?: string;
   variant?: 'light' | 'dark';
 }
 
 const logoSrc = {
-  light: '/logo.png',
-  dark: '/logo-white.png',
+  light: assetUrl('logo.png'),
+  dark: assetUrl('logo-white.png'),
 } as const;
 
 export function Logo({ className = 'h-12 w-auto', variant = 'light' }: LogoProps) {

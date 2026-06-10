@@ -47,7 +47,7 @@ export function Hero() {
 
           {/*<ScrollReveal delay={150}>
             TODO: add a video of the drone in action
-            <video src="/hero.mp4" autoPlay muted loop className="w-full h-full object-cover rounded-lg" />
+            <video src={assetUrl('hero.mp4')} autoPlay muted loop className="w-full h-full object-cover rounded-lg" />
           </ScrollReveal>*/}
 
           <ScrollReveal delay={200} className="mt-8">

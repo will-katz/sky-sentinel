@@ -1,3 +1,4 @@
+import { assetUrl } from '../assetUrl';
 import {
   SITE_DESCRIPTION,
   SITE_EMAIL,
@@ -13,7 +14,7 @@ const structuredData = {
   description: SITE_DESCRIPTION,
   url: SITE_URL,
   email: SITE_EMAIL,
-  image: `${SITE_URL}/logo.png`,
+  image: new URL(assetUrl('logo.png'), SITE_URL).href,
   areaServed: {
     '@type': 'State',
     name: 'New Jersey',

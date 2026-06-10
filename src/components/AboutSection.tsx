@@ -1,15 +1,16 @@
 import { Cctv, Plane, Shield } from 'lucide-react';
+import { assetUrl } from '../assetUrl';
 import { ScrollReveal } from './ScrollReveal';
 import { HighlightItem, HighlightList } from './HighlightItem';
 
 const fleet = [
   {
-    src: '/dji-matrice-m30t.png',
+    src: assetUrl('dji-matrice-m30t.png'),
     alt: 'DJI Matrice M30T in flight',
     name: 'DJI Matrice M30T',
   },
   {
-    src: '/dji-mavic-pro-platinum.png',
+    src: assetUrl('dji-mavic-pro-platinum.png'),
     alt: 'DJI Mavic Pro Platinum in flight',
     name: 'DJI Mavic Pro Platinum',
   },
