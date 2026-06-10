@@ -16,11 +16,9 @@ The site is deployed to [GitHub Pages](https://pages.github.com/) on every push 
 **One-time setup** (repo admin):
 
 1. Open **Settings → Pages**
-2. Under **Build and deployment → Source**, choose **Deploy from a branch**
-3. Set **Branch** to **`gh-pages`** and **Folder** to **`/ (root)`**
-4. Save
+2. Under **Build and deployment → Source**, choose **GitHub Actions** (not “Deploy from a branch”)
 
-Do **not** deploy from `main` — that serves unbuilt source and produces a blank page.
+If Source is set to **`main`** or **`gh-pages`**, GitHub serves unbuilt source and the page will be blank. It also runs a separate legacy Pages workflow that shows Node 20 deprecation warnings — ignore those by using **GitHub Actions** as the source instead.
 
 Until the client’s DNS is updated, the live preview is:
 
