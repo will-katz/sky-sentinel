@@ -11,11 +11,16 @@ Built with React, TypeScript, Vite, and Tailwind CSS.
 
 ## Hosting
 
-The site is deployed to [GitHub Pages](https://pages.github.com/) on every push to `main`.
+The site is deployed to [GitHub Pages](https://pages.github.com/) on every push to `main`. The workflow builds the site and publishes the output to the **`gh-pages` branch** (not `main` — `main` holds source code only).
 
 **One-time setup** (repo admin):
 
-1. Open **Settings → Pages** and set **Source** to **GitHub Actions**.
+1. Open **Settings → Pages**
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**
+3. Set **Branch** to **`gh-pages`** and **Folder** to **`/ (root)`**
+4. Save
+
+Do **not** deploy from `main` — that serves unbuilt source and produces a blank page.
 
 Until the client’s DNS is updated, the live preview is:
 
