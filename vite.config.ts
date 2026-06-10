@@ -14,6 +14,8 @@ const contactProxy = {
 } as const
 
 export default defineConfig({
+  // Project Pages URL is /sky-sentinel/; custom domain at root uses base / (default).
+  base: process.env.VITE_BASE_PATH ?? '/',
   plugins: [react(), tailwindcss()],
   server: {
     proxy: contactProxy,

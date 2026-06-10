@@ -39,9 +39,9 @@ loadEnv();
 
 const API_ID = process.env.CONTACT_API_ID ?? 'vzuzy5z5h0';
 const REGION = process.env.AWS_REGION ?? 'us-east-1';
-const BUCKET = process.env.S3_BUCKET ?? 'sky-sentinel-drone';
+const SITE_URL = process.env.VITE_SITE_URL ?? 'https://skysentineldrone.com';
 
-/** Public contact endpoint — allow any site origin (S3 URL, CloudFront, custom domain). */
+/** Public contact endpoint — allow any site origin (GitHub Pages, custom domain). */
 const corsConfiguration = {
   AllowOrigins: ['*'],
   AllowMethods: ['POST', 'OPTIONS'],
@@ -77,9 +77,7 @@ export async function configureContactApiCors() {
 
   console.log(`  API Gateway CORS updated (${API_ID})`);
   console.log('    allow origins: *');
-  console.log(
-    `    site bucket: http://${BUCKET}.s3-website-${REGION}.amazonaws.com`,
-  );
+  console.log(`    site url: ${SITE_URL}`);
 }
 
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
