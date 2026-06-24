@@ -4,6 +4,8 @@ import { CredentialsStrip } from './CredentialsStrip';
 import { HighlightItem, HighlightList } from './HighlightItem';
 import { Logo } from './Logo';
 
+//test comment
+
 const features = [
   {
     icon: Plane,
