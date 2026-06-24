@@ -20,6 +20,8 @@ The site is deployed to [GitHub Pages](https://pages.github.com/) on every push 
 
 If Source is set to **`main`** or **`gh-pages`**, GitHub serves unbuilt source and the page will be blank. It also runs a separate legacy Pages workflow that shows Node 20 deprecation warnings — ignore those by using **GitHub Actions** as the source instead.
 
+If the site redirects to `skysentineldrone.com` (Squarespace “Coming Soon”), remove the custom domain under **Settings → Pages** until DNS points at GitHub Pages. Do not add a `CNAME` file to the repo until then.
+
 Until the client’s DNS is updated, the live preview is:
 
 **https://will-katz.github.io/sky-sentinel/**
@@ -29,7 +31,8 @@ When the client is ready to connect `skysentineldrone.com`:
 1. In `.github/workflows/deploy.yml`, change the build env to:
    - `VITE_SITE_URL: https://skysentineldrone.com`
    - Remove `VITE_BASE_PATH` (custom domain is served from `/`)
-2. Point DNS at GitHub Pages:
+2. Add `public/CNAME` containing `skysentineldrone.com`
+3. Point DNS at GitHub Pages:
    - **Apex** (`skysentineldrone.com`): A records → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - **www** (optional): CNAME → `will-katz.github.io`
 3. In **Settings → Pages**, enter the custom domain and enable **Enforce HTTPS** once DNS has propagated.
