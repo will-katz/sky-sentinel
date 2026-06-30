@@ -192,7 +192,7 @@ export function ContactForm() {
                   <div>
                     <h4 className="mb-1.5 text-sm font-medium tracking-tight">Email</h4>
                     <a
-                      href="mailto:skysentineldrone@skysentineldrone.com"
+                      href="mailto:skysentineldrone.com@skysentineldrone.com"
                       className="text-sm text-muted-foreground break-all hover:text-foreground transition-colors duration-200"
                     >
                       skysentineldrone@skysentineldrone.com
