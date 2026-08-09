@@ -11,30 +11,24 @@ Built with React, TypeScript, Vite, and Tailwind CSS.
 
 ## Hosting
 
-The site is deployed to [GitHub Pages](https://pages.github.com/) on every push to `main`. The workflow builds the site and publishes the output to the **`gh-pages` branch** (not `main` — `main` holds source code only).
+The site deploys to **AWS S3** (with optional **CloudFront** invalidation) on every push to `main` via GitHub Actions.
 
-**One-time setup** (repo admin):
+### Required GitHub Actions secrets
 
-1. Open **Settings → Pages**
-2. Under **Build and deployment → Source**, choose **GitHub Actions** (not “Deploy from a branch”)
+| Secret | Purpose |
+|--------|---------|
+| `AWS_ACCESS_KEY_ID` | IAM user access key |
+| `AWS_SECRET_ACCESS_KEY` | IAM user secret key |
 
-If Source is set to **`main`** or **`gh-pages`**, GitHub serves unbuilt source and the page will be blank. It also runs a separate legacy Pages workflow that shows Node 20 deprecation warnings — ignore those by using **GitHub Actions** as the source instead.
+### Optional secrets
 
-If the site redirects to `skysentineldrone.com` (Squarespace “Coming Soon”), remove the custom domain under **Settings → Pages** until DNS points at GitHub Pages. Do not add a `CNAME` file to the repo until then.
+| Secret | Default | Purpose |
+|--------|---------|---------|
+| `AWS_REGION` | `us-east-1` | AWS region |
+| `S3_BUCKET` | `sky-sentinel-drone` | Destination bucket |
+| `CLOUDFRONT_DISTRIBUTION_ID` | _(none)_ | If set, invalidates `/*` after sync |
+| `VITE_SITE_URL` | `https://skysentineldrone.com` | Canonical site URL baked into the build |
 
-Until the client’s DNS is updated, the live preview is:
+Local `.env` is not used. For local AWS CLI commands (`npm run configure-api`), use `aws configure` or export the same variables in your shell.
 
-**https://will-katz.github.io/sky-sentinel/**
-
-When the client is ready to connect `skysentineldrone.com`:
-
-1. In `.github/workflows/deploy.yml`, change the build env to:
-   - `VITE_SITE_URL: https://skysentineldrone.com`
-   - Remove `VITE_BASE_PATH` (custom domain is served from `/`)
-2. Add `public/CNAME` containing `skysentineldrone.com`
-3. Point DNS at GitHub Pages:
-   - **Apex** (`skysentineldrone.com`): A records → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - **www** (optional): CNAME → `will-katz.github.io`
-3. In **Settings → Pages**, enter the custom domain and enable **Enforce HTTPS** once DNS has propagated.
-
-The contact form API remains on AWS Lambda/API Gateway (`npm run configure-api` updates CORS if needed).
+The contact form API remains on AWS Lambda/API Gateway. Lambda env vars (`CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL`) stay in the Lambda configuration in AWS — not in this repo.

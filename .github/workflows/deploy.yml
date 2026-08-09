@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to AWS
 
 on:
   push:
@@ -7,15 +7,13 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: deploy-aws
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -26,28 +24,57 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+
+      - name: Build site
+        run: |
+          export VITE_SITE_URL="${VITE_SITE_URL:-https://skysentineldrone.com}"
+          npm run build
         env:
-          # Until the client points skysentineldrone.com at GitHub Pages, use the project URL.
-          VITE_SITE_URL: https://will-katz.github.io/sky-sentinel
-          VITE_BASE_PATH: /sky-sentinel/
+          VITE_SITE_URL: ${{ secrets.VITE_SITE_URL }}
 
       - name: Verify production build
         run: |
           grep -q '/assets/' dist/index.html
           ! grep -q '/src/main.tsx' dist/index.html
 
-      - uses: actions/upload-pages-artifact@v5
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          path: dist
-          include-hidden-files: true
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/deploy-pages@v5
-        id: deployment
+      - name: Sync to S3
+        env:
+          S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        run: |
+          BUCKET="${S3_BUCKET:-sky-sentinel-drone}"
+
+          aws s3 sync dist "s3://${BUCKET}" --delete \
+            --cache-control "public, max-age=86400"
+
+          if [ -d dist/assets ]; then
+            aws s3 sync dist/assets "s3://${BUCKET}/assets" \
+              --cache-control "public, max-age=31536000, immutable"
+          fi
+
+          find dist -name '*.html' -print0 | while IFS= read -r -d '' file; do
+            key="${file#dist/}"
+            aws s3 cp "$file" "s3://${BUCKET}/${key}" \
+              --cache-control "max-age=0, no-cache, no-store, must-revalidate" \
+              --content-type "text/html; charset=utf-8"
+          done
+
+          echo "Deployed to s3://${BUCKET}/"
+
+      - name: Invalidate CloudFront
+        env:
+          CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          if [ -z "$CLOUDFRONT_DISTRIBUTION_ID" ]; then
+            echo "CLOUDFRONT_DISTRIBUTION_ID not set — skipping invalidation"
+            exit 0
+          fi
+          aws cloudfront create-invalidation \
+            --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths "/*"
