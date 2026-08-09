@@ -35,3 +35,8 @@ export const SITE_SERVICES = [
   'Industrial Facilities',
   'Event Surveillance',
 ];
+
+export const TEAM_TITLE = 'Our Team | Sky Sentinel';
+
+export const TEAM_DESCRIPTION =
+  'Meet the Sky Sentinel team — FAA Part 107-licensed drone pilots with U.S. military aviation and New Jersey law enforcement experience.';

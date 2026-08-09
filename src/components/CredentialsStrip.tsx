@@ -8,7 +8,7 @@ interface CredentialsStripProps {
 const badges = [
   {
     icon: Medal,
-    label: 'U.S. Veteran Owned & Operated',
+    label: 'U.S. Veteran-Owned & Operated',
   },
   {
     icon: BadgeCheck,

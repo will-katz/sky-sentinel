@@ -195,7 +195,7 @@ export function ContactForm() {
                       href="mailto:skysentineldrone.com@skysentineldrone.com"
                       className="text-sm text-muted-foreground break-all hover:text-foreground transition-colors duration-200"
                     >
-                      skysentineldrone@skysentineldrone.com
+                      skysentineldrone.com@skysentineldrone.com
                     </a>
                   </div>
                 </div>

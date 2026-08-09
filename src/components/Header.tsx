@@ -1,19 +1,32 @@
 import { Menu, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type MouseEvent } from 'react';
 import { Logo } from './Logo';
+import { homeSectionHref, navigate, useAppPath, type AppPath } from '../routing';
 
-const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#contact', label: 'Contact' },
-] as const;
+function navLinksFor(path: AppPath) {
+  return [
+    { href: homeSectionHref('#about', path), label: 'About' },
+    { href: homeSectionHref('#services', path), label: 'Services' },
+    { href: '/team', label: 'Team' },
+    { href: homeSectionHref('#contact', path), label: 'Contact' },
+  ] as const;
+}
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const path = useAppPath();
+  const navLinks = navLinksFor(path);
+  const contactHref = homeSectionHref('#contact', path);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const goHome = () => {
+    navigate('/');
     setIsMenuOpen(false);
+  };
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    setIsMenuOpen(false);
+    navigate(href);
   };
 
   useEffect(() => {
@@ -28,13 +41,13 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-3 min-h-16 sm:min-h-20">
           <a
-            href="#"
+            href="/"
             onClick={(event) => {
               event.preventDefault();
-              scrollToTop();
+              goHome();
             }}
             className="flex flex-col gap-0.5 sm:gap-1 min-w-0 rounded-lg hover:opacity-80 transition-opacity"
-            aria-label="Back to top"
+            aria-label="Sky Sentinel home"
           >
             <Logo className="h-8 sm:h-10 w-auto max-w-[min(100%,12rem)]" />
             <p className="hidden sm:block text-xs sm:text-sm text-muted-foreground truncate">
@@ -43,17 +56,24 @@ export function Header() {
           </a>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-            {navLinks.slice(0, 2).map((link) => (
+            {navLinks.slice(0, 3).map((link) => (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                onClick={(event) => handleNavClick(event, link.href)}
+                className={`text-sm transition-colors duration-200 ${
+                  link.href === '/team' && path === '/team'
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                aria-current={link.href === '/team' && path === '/team' ? 'page' : undefined}
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="#contact"
+              href={contactHref}
+              onClick={(event) => handleNavClick(event, contactHref)}
               className="bg-primary text-primary-foreground text-sm px-5 py-2 rounded-full hover:opacity-90 transition-opacity duration-200"
             >
               Get Quote
@@ -80,18 +100,23 @@ export function Header() {
           >
             {navLinks.map((link) => (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
-                className="block py-3 px-2 text-muted-foreground hover:text-foreground transition-colors duration-200 text-base"
-                onClick={() => setIsMenuOpen(false)}
+                className={`block py-3 px-2 transition-colors duration-200 text-base ${
+                  link.href === '/team' && path === '/team'
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                aria-current={link.href === '/team' && path === '/team' ? 'page' : undefined}
+                onClick={(event) => handleNavClick(event, link.href)}
               >
                 {link.label}
               </a>
             ))}
             <a
-              href="#contact"
+              href={contactHref}
               className="block mt-2 py-3.5 px-4 text-center bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-base font-medium"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(event) => handleNavClick(event, contactHref)}
             >
               Get Quote
             </a>

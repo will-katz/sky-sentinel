@@ -13,7 +13,7 @@ const features = [
   {
     icon: Shield,
     title: 'Certified Pilots',
-    description: 'FAA licensed professionals',
+    description: 'FAA-licensed professionals',
   },
   {
     icon: Clock,

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Building2,
   ChevronDown,
@@ -9,6 +9,8 @@ import {
   Zap,
 } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
+
+const PANEL_MS = 300;
 
 const services = [
   {
@@ -38,7 +40,7 @@ const services = [
   {
     icon: TreePine,
     title: 'Aerial Photography',
-    description: 'High quality aerial photography and videography for real estate, marketing, and more.',
+    description: 'High-quality aerial photography and videography for real estate, marketing, and more.',
     features: ['Aerial videography', 'Real estate photography', 'Marketing photography'],
   },
   {
@@ -50,10 +52,64 @@ const services = [
 ];
 
 export function Services() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [renderedIndex, setRenderedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const switchTimerRef = useRef<number | null>(null);
+
+  const openService = services[renderedIndex];
+  const isExpanded = expandedIndex !== null;
+
+  useEffect(() => {
+    return () => {
+      if (switchTimerRef.current !== null) {
+        window.clearTimeout(switchTimerRef.current);
+      }
+    };
+  }, []);
+
+  const clearSwitchTimer = () => {
+    if (switchTimerRef.current !== null) {
+      window.clearTimeout(switchTimerRef.current);
+      switchTimerRef.current = null;
+    }
+  };
+
+  const openPanel = (index: number) => {
+    setRenderedIndex(index);
+    setExpandedIndex(index);
+    setSelectedIndex(index);
+  };
+
+  const closePanel = () => {
+    setExpandedIndex(null);
+    setSelectedIndex(null);
+  };
 
   const toggleService = (index: number) => {
-    setOpenIndex((current) => (current === index ? null : index));
+    clearSwitchTimer();
+
+    if (selectedIndex === index) {
+      closePanel();
+      return;
+    }
+
+    setSelectedIndex(index);
+
+    if (expandedIndex === null) {
+      openPanel(index);
+      return;
+    }
+
+    // Close the current panel, then open the newly selected one.
+    setExpandedIndex(null);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const delay = reduceMotion ? 0 : PANEL_MS;
+
+    switchTimerRef.current = window.setTimeout(() => {
+      openPanel(index);
+      switchTimerRef.current = null;
+    }, delay);
   };
 
   return (
@@ -69,19 +125,22 @@ export function Services() {
           </p>
         </ScrollReveal>
 
-        <div className="max-w-5xl mx-auto rounded-xl overflow-hidden ring-1 ring-border bg-background pb-6 sm:pb-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
-          {services.map((service, index) => {
-            const isOpen = openIndex === index;
+        <ScrollReveal className="max-w-5xl mx-auto">
+          <div className="rounded-xl overflow-hidden ring-1 ring-border bg-background">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
+              {services.map((service, index) => {
+                const isSelected = selectedIndex === index;
+                const isOpen = expandedIndex === index;
 
-            return (
-              <ScrollReveal key={service.title} delay={(index % 3) * 100} className="w-full">
-                <div className={`bg-background h-full ${isOpen ? 'pb-6 sm:pb-8' : 'pb-4 sm:pb-4'}`}>
+                return (
                   <button
+                    key={service.title}
                     type="button"
                     onClick={() => toggleService(index)}
                     aria-expanded={isOpen}
-                    className="w-full flex items-center gap-3.5 px-4 sm:px-5 pt-4 sm:pt-5 text-left hover:bg-secondary/50 transition-colors duration-200"
+                    className={`w-full flex items-center gap-3.5 px-4 sm:px-5 py-3.5 sm:py-4 text-left bg-background transition-colors duration-200 ${
+                      isSelected ? 'bg-secondary/70' : 'hover:bg-secondary/50'
+                    }`}
                   >
                     <service.icon className="w-5 h-5 text-foreground/60 shrink-0" strokeWidth={1.5} />
                     <h3 className="flex-1 min-w-0 text-sm sm:text-base">{service.title}</h3>
@@ -91,36 +150,43 @@ export function Services() {
                       }`}
                     />
                   </button>
+                );
+              })}
+            </div>
 
-                  <div
-                    className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-                      isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
-                    }`}
-                  >
-                    <div className="overflow-hidden min-h-0">
-                      <div
-                        className={`px-4 sm:px-5 border-t border-border transition-opacity duration-300 motion-reduce:transition-none ${
-                          isOpen ? 'opacity-100' : 'opacity-0'
-                        }`}
+            <div
+              className={`grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                isExpanded ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+              }`}
+            >
+              <div className="overflow-hidden min-h-0">
+                <div
+                  className={`border-t border-border px-4 sm:px-5 py-4 transition-opacity duration-300 motion-reduce:transition-none ${
+                    isExpanded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <p className="text-sm font-medium text-foreground tracking-tight mb-1.5">
+                    {openService.title}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    {openService.description}
+                  </p>
+                  <ul className="space-y-1">
+                    {openService.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="text-sm text-muted-foreground flex items-start gap-2"
                       >
-                        <p className="text-sm text-muted-foreground mt-4 mb-4 leading-relaxed">{service.description}</p>
-                        <ul className="space-y-1.5 mb-2">
-                          {service.features.map((feature) => (
-                            <li key={feature} className="text-sm text-muted-foreground flex items-start gap-2">
-                              <span className="text-foreground/30 mt-0.5">–</span>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                        <span className="text-foreground/30 mt-0.5">–</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </ScrollReveal>
-            );
-          })}
+              </div>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );
