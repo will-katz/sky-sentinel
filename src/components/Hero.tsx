@@ -32,7 +32,7 @@ export function Hero() {
             <h1 className="sr-only">Sky Sentinel: Precision Aerial Inspections</h1>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Professional FAA Part 107 drone inspections, aerial photography, and surveillance
-              services for commercial, residential, and industrial clients across New Jersey.
+              services for commercial, residential, industrial, and private clients across New Jersey.
             </p>
             <div className="mt-8 pt-8 border-t border-border max-w-xl mx-auto">
               <p className="text-sm sm:text-base text-foreground max-w-2xl mx-auto text-pretty leading-relaxed flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
