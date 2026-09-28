@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Loader2, Mail, Send } from 'lucide-react';
+import { Loader2, Mail, Phone, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { ScrollReveal } from './ScrollReveal';
 import { CONTACT_API_URL } from '../config';
@@ -169,24 +169,20 @@ export function ContactForm() {
           </ScrollReveal>
 
           <div className="w-full space-y-6">
-            {/*<ScrollReveal direction="right" delay={100}>
-              <div className="bg-card rounded-lg border border-border p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                    TODO: Add phone number and hours of operation 
+            <ScrollReveal delay={200} className="w-full">
+              <div className="border-t border-border pt-8 lg:pt-0 lg:border-t-0 lg:pl-8 lg:border-l w-full mx-auto max-lg:max-w-md space-y-8">
+                <div className="flex flex-col items-center text-center gap-3 lg:items-start lg:text-left">
+                  <Phone className="w-5 h-5 text-foreground/60 shrink-0" strokeWidth={1.5} />
                   <div>
-                    <h4 className="mb-1">Phone</h4>
-                    <p className="text-sm text-muted-foreground">(xxx) xxx-xxxx</p>
-                    <p className="text-sm text-muted-foreground">Mon-Fri 8am-5pm</p>
+                    <h4 className="mb-1.5 text-sm font-medium tracking-tight">Phone</h4>
+                    <a
+                      href="tel:+17326301650"
+                      className="text-sm text-muted-foreground break-all hover:text-foreground transition-colors duration-200"
+                    >
+                      (732) 630-1650
+                    </a>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>*/}
-
-            <ScrollReveal delay={200} className="w-full">
-              <div className="border-t border-border pt-8 lg:pt-0 lg:border-t-0 lg:pl-8 lg:border-l w-full mx-auto max-lg:max-w-md">
                 <div className="flex flex-col items-center text-center gap-3 lg:items-start lg:text-left">
                   <Mail className="w-5 h-5 text-foreground/60 shrink-0" strokeWidth={1.5} />
                   <div>

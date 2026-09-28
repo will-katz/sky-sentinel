@@ -33,7 +33,7 @@ const team: TeamMember[] = [
     ],
   },
   {
-    name: 'George Awad',
+    name: 'George A.',
     role: 'Remote Pilot',
     photo: 'team/george-awad.jpg',
     photoAlt: 'Portrait of George Awad, Sky Sentinel remote pilot',
@@ -44,11 +44,11 @@ const team: TeamMember[] = [
       'FLETC Graduate',
     ],
     bio: [
-      'George Awad is an FAA Part 107-licensed drone pilot. He is a law enforcement professional with 17+ years of experience in policing, security, K9 explosives detection, and intelligence operations. His skills also include investigations, emergency response, officer training, and multi-agency coordination. He is a certified Vapor Wake® K9 handler, a FLETC graduate, and a current police officer with a proven record of protecting public safety in high-pressure environments. He is fluent in select Arabic dialects and skilled in building community trust and operational readiness.',
+      'George is an FAA Part 107-licensed drone pilot. He is a law enforcement professional with 17+ years of experience in policing, security, K9 explosives detection, and intelligence operations. His skills also include investigations, emergency response, officer training, and multi-agency coordination. He is a certified Vapor Wake® K9 handler, a FLETC graduate, and a current police officer with a proven record of protecting public safety in high-pressure environments. He is fluent in select Arabic dialects and skilled in building community trust and operational readiness.',
     ],
   },
   {
-    name: 'David McDevitt',
+    name: 'David M.',
     role: 'Remote Pilot',
     photo: 'team/david-mcdevitt.jpg',
     photoAlt: 'Portrait of David McDevitt, Sky Sentinel remote pilot',
@@ -58,7 +58,7 @@ const team: TeamMember[] = [
       'B.S. Business Administration & Management',
     ],
     bio: [
-      "David McDevitt is an FAA Part 107-licensed Remote Pilot specializing in professional aerial imaging and drone operations. David is a graduate of Montclair State University's Feliciano School of Business and holds a bachelor's degree in Business Administration & Management. David is currently employed as a full-time police officer in New Jersey with over five years of experience. He provides safe, efficient, and high-quality drone services for commercial, industrial, and residential clients.",
+      "David is an FAA Part 107-licensed Remote Pilot specializing in professional aerial imaging and drone operations. David is a graduate of Montclair State University's Feliciano School of Business and holds a bachelor's degree in Business Administration & Management. David is currently employed as a full-time police officer in New Jersey with over five years of experience. He provides safe, efficient, and high-quality drone services for commercial, industrial, and residential clients.",
     ],
   },
 ];

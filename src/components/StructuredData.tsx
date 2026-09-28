@@ -3,6 +3,7 @@ import {
   SITE_DESCRIPTION,
   SITE_EMAIL,
   SITE_NAME,
+  SITE_PHONE,
   SITE_SERVICES,
   SITE_URL,
 } from '../seo';
@@ -14,6 +15,7 @@ const structuredData = {
   description: SITE_DESCRIPTION,
   url: SITE_URL,
   email: SITE_EMAIL,
+  telephone: SITE_PHONE,
   image: new URL(assetUrl('logo.png'), SITE_URL).href,
   areaServed: {
     '@type': 'State',

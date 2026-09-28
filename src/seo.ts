@@ -11,6 +11,8 @@ export const SITE_DESCRIPTION =
 
 export const SITE_EMAIL = 'skysentineldrone@skysentineldrone.com';
 
+export const SITE_PHONE = '+17326301650';
+
 export const SITE_KEYWORDS = [
   'drone inspection',
   'aerial inspection',
