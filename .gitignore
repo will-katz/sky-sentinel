@@ -5,4 +5,4 @@ dist/
 .env
 .env.*
 .cursorrules
-.cursor//rules/*
+.cursor/
